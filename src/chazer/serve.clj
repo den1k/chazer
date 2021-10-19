@@ -245,9 +245,7 @@
           "mp4" "video/mp4"
           "png" "image/png"
           ("jpg" "jpeg") "image/jpeg"))
-      resp))
-
-  )
+      resp)))
 
 (defn with-resource [{:as req :keys [uri]}]
   (when-let [resource (io/resource (subs uri 1))]
