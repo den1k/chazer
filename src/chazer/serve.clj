@@ -132,6 +132,7 @@
         [:.dn {:position :none}]
         [:.br-pill {:border-radius :9999px}]
         [:.br-100 {:border-radius :100%}]
+        [:.pointer {:cursor :pointer}]
         (-> (->indexed-spacers :.f :font-size :rem default-font-sizes)
             css-with-ns-m-l-media)
         (-> (->indexed-spacers :.lh :line-height "" [0.8 0.9 1 1.2 1.4 1.5])
@@ -157,75 +158,81 @@
         (->indexed-spacers :.column-gap :column-gap :rem)
         ]))
 
+(def checkout-link "https://buy.stripe.com/8wM29qgfR0xC4mYeUU")
+
+(def home-html
+  (str
+    "<!DOCTYPE html>\n"
+    (h/html
+      [:html
+       [:head
+        [:title "CHAZER 3000"]
+        [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
+        [:style {:type "text/css"}
+         base-css]]
+       [:body.ma0
+        {:style {:background "rgb(0,75,255)"}}
+        ;[:nav "Chazer"]
+        [:div.pt3.flex.w-100.pb4
+         [:div.flex.column-gap4.justify-center.flex-wrap.align-center
+          [:div.pt4.flex.justify-center.w-70.w8-ns
+           {:style {:flex-shrink 0}}
+           [:video.w-100
+            {:type     "video/mp4"
+             :muted    ""
+             :autoplay ""
+             :loop     ""}
+            [:source {:src "/public/img/chazer-spins.mp4"}]]]
+          [:div.flex-column.flex-wrap.items-center
+           [:div.pl4-ns.f12-ns.f7
+            {:style (assoc base-text-style
+                      :font-weight "bold"
+                      :font-style "italic")}
+            "now only!"]
+           [:div.f10.f23-ns.lh1-ns
+            {:style (assoc base-text-style
+                      :font-weight "bold"
+                      ;:line-height "14rem"
+                      ;:font-size "16rem"
+                      )}
+            "$69.69"]]
+          [:div.flex.column-gap5.row-gap3.items-center.pt4.flex-wrap.justify-center.w-100
+           [:a.f6.f10-ns.w-90.w8-ns
+            {:href  checkout-link
+             :style (assoc base-text-style
+                      ;:font-size "4rem"
+                      :font-style "italic"
+                      :text-shadow nil
+                      :text-align "center"
+                      :white-space "nowrap")}
+            "BUY NOW!"]
+           [:div.w-90.w8-ns
+            [:img.w-100
+             {;:style {:height "auto"}
+              :src "/public/img/cc-cards.png"}]]
+           [:div.w-80.w8-ns
+            [:img.w-100
+             {:style {:filter "drop-shadow(6px 6px 2px #222)"}
+              :src   "/public/img/chazer-logo.png"}]]]
+          [:div.flex.justify-center.w-100.pb4.flex-column.items-center.pt5
+           [:div.relative.w-60-ns.w-80-m.w-90
+            {:style {:flex-shrink 0}}
+            [:div.absolute.w7-ns.w6-m.w5
+             {:style {:top "0px" :left "0px" :z-index 1}}
+             [:img.br2.w-100
+              {:src   "/public/img/as-seen-on-youtube.jpeg"
+               :style {:transform "rotate(-30deg)"}}]]
+            [:video.w-100 {:type     "video/mp4"
+                           :controls ""}
+             [:source {:src "/public/img/chazer-infomercial.mp4"}]]]]
+          [:form {:action checkout-link}
+           [:input.f7.pointer {:type "submit" :value "BUY NOW!"}]]]]]])))
+
 ;; the home page
 (defn home-response []
-  {:status 200
-   ;:headers {"Set-Cookie" (str "notes-id=" session-id)}
-   :body   (str
-             "<!DOCTYPE html>\n"
-             (h/html
-               [:html
-                [:head
-                 [:title "CHAZER 3000"]
-                 [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
-                 [:style {:type "text/css"}
-                  base-css]]
-                [:body.ma0
-                 {:style {:background "rgb(0,75,255)"}}
-                 ;[:nav "Chazer"]
-                 [:div.pt3.flex.w-100.pb4
-                  [:div.flex.column-gap4.justify-center.flex-wrap.align-center
-                   [:div.pt4.flex.justify-center.w-70.w8-ns
-                    {:style {:flex-shrink 0}}
-                    [:video.w-100
-                     {:type     "video/mp4"
-                      :autoplay ""
-                      :loop     ""}
-                     [:source {:src "/public/img/chazer-spins.mp4"}]]]
-                   [:div.flex-column.flex-wrap.items-center
-                    [:div.pl4-ns.f12-ns.f7
-                     {:style (assoc base-text-style
-                               :font-weight "bold"
-                               :font-style "italic")}
-                     "now only!"]
-                    [:div.f10.f23-ns.lh1-ns
-                     {:style (assoc base-text-style
-                               :font-weight "bold"
-                               ;:line-height "14rem"
-                               ;:font-size "16rem"
-                               )}
-                     "$69.69"]]
-                   [:div.flex.column-gap5.row-gap3.items-center.pt4.flex-wrap.justify-center.w-100
-                    [:a.f6.f10-ns.w-90.w8-ns
-                     {:href  "https://buy.stripe.com/8wM29qgfR0xC4mYeUU"
-                      :style (assoc base-text-style
-                               ;:font-size "4rem"
-                               :font-style "italic"
-                               :text-shadow nil
-                               :text-align "center"
-                               :white-space "nowrap")}
-                     "BUY NOW!"]
-                    [:div.w-90.w8-ns
-                     [:img.w-100
-                      {;:style {:height "auto"}
-                       :src "/public/img/cc-cards.png"}]]
-                    [:div.w-80.w8-ns
-                     [:img.w-100
-                      {:style {:filter "drop-shadow(6px 6px 2px #222)"}
-                       :src   "/public/img/chazer-logo.png"}]]]
-                   [:div.flex.justify-center.w-100.pb4.flex-column.items-center
-                    [:div.relative.w-80
-                     {:style {:flex-shrink 0}}
-                     [:div.absolute.w7-ns.w5
-                      {:style {:top "0px" :left "0px" :z-index 1}}
-                      [:img.br2.w-100
-                       {:src   "/public/img/as-seen-on-youtube.jpeg"
-                        :style {:transform "rotate(-30deg)"}}]]
-                     [:video.w-100 {:type     "video/mp4"
-                                    :controls ""}
-                      [:source {:src "/public/img/chazer-infomercial.mp4"}]]]]
-                   [:form {:action "https://buy.stripe.com/8wM29qgfR0xC4mYeUU"}
-                    [:input {:type "submit" :value "BUY NOW!"}]]]]]]))})
+  {:status  200
+   :headers {"Content-Type" "text/html"}
+   :body    home-html})
 
 
 (defn with-mime-type [{:as req :keys [uri]} resp]
@@ -271,7 +278,7 @@
       (println))
     response))
 
-(def server
+#_(def server
   (do
     (when-let [s (resolve 'server)]
       (when (bound? s)
@@ -279,4 +286,4 @@
     (println "Server started on port 8080.")
     (server/run-server handler {:port 8080})))
 
-@(promise) ;; wait until SIGINT
+;@(promise)                                                  ;; wait until SIGINT
