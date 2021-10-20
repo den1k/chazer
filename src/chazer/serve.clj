@@ -169,8 +169,6 @@
         [:title "CHAZER 3000"]
         [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
         [:style {:type "text/css"} base-css]
-        [:script {:type "text/javascript" :src "/index.js"}]
-        [:script {:type "text/javascript" :src "/service-worker.js"}]
         ]
        [:body.ma0
         {:style {:background "rgb(0,75,255)"}}
