@@ -183,7 +183,9 @@
              :loop        ""
              :playsinline ""}
             [:source {:src  "/img/chazer-spins.mp4"
-                      :type "video/mp4"}]]]
+                      :type "video/mp4"}]
+            [:source {:src  "/img/chazer-spins.webm"
+                      :type "video/webm"}]]]
           [:div.flex-column.flex-wrap.items-center
            [:div.pl4-ns.f12-ns.f7
             {:style (assoc base-text-style
