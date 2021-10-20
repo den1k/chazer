@@ -183,7 +183,8 @@
              :autoplay    ""
              :loop        ""
              :playsinline ""}
-            [:source {:src "/img/chazer-spins.mp4"}]]]
+            [:source {:src "/img/chazer-spins.mp4"
+                      :type "video/mp4"}]]]
           [:div.flex-column.flex-wrap.items-center
            [:div.pl4-ns.f12-ns.f7
             {:style (assoc base-text-style
@@ -226,7 +227,8 @@
             [:video.w-100 {:type        "video/mp4"
                            :controls    ""
                            :playsinline ""}
-             [:source {:src "/img/chazer-infomercial.mp4"}]]]]
+             [:source {:src "/img/chazer-infomercial.mp4"
+                       :type "video/mp4"}]]]]
           [:form.w-70.flex.justify-center {:action checkout-link}
            [:input.f6.pointer {:type "submit" :value "BUY NOW!"}]]]]]])))
 
