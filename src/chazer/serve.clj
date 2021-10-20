@@ -228,7 +228,11 @@
              [:img.br2.w-100
               {:src   "/img/as-seen-on-youtube.jpeg"
                :style {:transform "rotate(-30deg)"}}]]
-            [:iframe
+            [:iframe {:width           "100%"
+                      :height          "500"
+                      :src             "https://www.youtube.com/embed/WQNhJ9yR98g" :title "YouTube video player" :frameborder "0" :allow "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      :allowfullscreen ""}]
+            #_[:iframe
              {:width           "100%"
               :height          "500px"
               :src             "https://www.youtube.com/embed/WQNhJ9yR98g?controls=0&autoplay=1"
