@@ -228,7 +228,9 @@
             [:video.w-100 {:controls    ""
                            :playsinline ""}
              [:source {:src  "/img/chazer-infomercial.mp4"
-                       :type "video/mp4"}]]]]
+                       :type "video/mp4"}]
+             [:source {:src  "/img/chazer-infomercial.webm"
+                       :type "video/webm"}]]]]
           [:form.w-70.flex.justify-center {:action checkout-link}
            [:input.f6.pointer {:type "submit" :value "BUY NOW!"}]]]]]])))
 
