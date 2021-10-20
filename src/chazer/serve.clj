@@ -216,10 +216,10 @@
              {:style {:filter "drop-shadow(6px 6px 2px #222)"}
               :src   "/img/chazer-logo.png"}]]]
           [:div.flex.justify-center.w-100.pb4.flex-column.items-center.pt5
-           [:div.relative.w-60-ns.w-80-m.w-90
+           [:div.relative.w-60-ns.w-80-m.w-80
             {:style {:flex-shrink 0}}
             [:div.absolute.w7-ns.w6-m.w5
-             {:style {:top "0px" :left "0px" :z-index 1}}
+             {:style {:top "-7%" :left "-7%" :z-index 1}}
              [:img.br2.w-100
               {:src   "/img/as-seen-on-youtube.jpeg"
                :style {:transform "rotate(-30deg)"}}]]
@@ -227,8 +227,8 @@
                            :controls    ""
                            :playsinline ""}
              [:source {:src "/img/chazer-infomercial.mp4"}]]]]
-          [:form {:action checkout-link}
-           [:input.f7.pointer {:type "submit" :value "BUY NOW!"}]]]]]])))
+          [:form.w-70.flex.justify-center {:action checkout-link}
+           [:input.f6.pointer {:type "submit" :value "BUY NOW!"}]]]]]])))
 
 ;; the home page
 (defn home-response []
@@ -277,11 +277,11 @@
     response))
 
 #_(def server
-    (do
-      (when-let [s (resolve 'server)]
-        (when (bound? s)
-          (s)))
-      (println "Server started on port 8080.")
-      (server/run-server handler {:port 8080})))
+  (do
+    (when-let [s (resolve 'server)]
+      (when (bound? s)
+        (s)))
+    (println "Server started on port 8080.")
+    (server/run-server handler {:port 8080})))
 
 ;@(promise)                                                  ;; wait until SIGINT
