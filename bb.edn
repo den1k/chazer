@@ -1,5 +1,5 @@
 {:paths ["src" "resources"]
- :deps  {mount/mount {:mvn/version "0.1.16"}}
+ :deps  {}
  :tasks {build-static {:doc "Builds static HTML"
                        :requires ([chazer.serve :as ch])
                        :task (spit "resources/public/index.html"

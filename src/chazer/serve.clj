@@ -223,8 +223,7 @@
              [:img.br2.w-100
               {:src   "/img/as-seen-on-youtube.jpeg"
                :style {:transform "rotate(-30deg)"}}]]
-            [:video.w-100 {:type        "video/mp4"
-                           :controls    ""
+            [:video.w-100 {:controls    ""
                            :playsinline ""}
              [:source {:src  "/img/chazer-infomercial.mp4"
                        :type "video/mp4"}]]]]
