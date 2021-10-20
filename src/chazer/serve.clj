@@ -168,8 +168,10 @@
        [:head
         [:title "CHAZER 3000"]
         [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
-        [:style {:type "text/css"}
-         base-css]]
+        [:style {:type "text/css"} base-css]
+        [:script {:type "text/javascript" :src "/index.js"}]
+        [:script {:type "text/javascript" :src "/service-worker.js"}]
+        ]
        [:body.ma0
         {:style {:background "rgb(0,75,255)"}}
         ;[:nav "Chazer"]
@@ -184,8 +186,8 @@
              :playsinline ""}
             [:source {:src  "/img/chazer-spins.mp4"
                       :type "video/mp4"}]
-            [:source {:src  "/img/chazer-spins.webm"
-                      :type "video/webm"}]]]
+            #_[:source {:src  "/img/chazer-spins.webm"
+                        :type "video/webm"}]]]
           [:div.flex-column.flex-wrap.items-center
            [:div.pl4-ns.f12-ns.f7
             {:style (assoc base-text-style
@@ -229,10 +231,12 @@
                            :playsinline ""}
              [:source {:src  "/img/chazer-infomercial.mp4"
                        :type "video/mp4"}]
-             [:source {:src  "/img/chazer-infomercial.webm"
-                       :type "video/webm"}]]]]
+             #_[:source {:src  "/img/chazer-infomercial.webm"
+                         :type "video/webm"}]]]]
           [:form.w-70.flex.justify-center {:action checkout-link}
-           [:input.f6.pointer {:type "submit" :value "BUY NOW!"}]]]]]])))
+           [:input.f6.pointer {:type "submit" :value "BUY NOW!"}]]]]
+
+        ]])))
 
 ;; the home page
 (defn home-response []
@@ -249,7 +253,9 @@
         (case ext
           "ico" "image/x-icon"
           "mp4" "video/mp4"
+          "webm" "video/webm"
           "png" "image/png"
+          "js" "application/javascript"
           ("jpg" "jpeg") "image/jpeg"))
       resp)))
 
@@ -279,11 +285,11 @@
     response))
 
 #_(def server
-    (do
-      (when-let [s (resolve 'server)]
-        (when (bound? s)
-          (s)))
-      (println "Server started on port 8080.")
-      (server/run-server handler {:port 8080})))
+  (do
+    (when-let [s (resolve 'server)]
+      (when (bound? s)
+        (s)))
+    (println "Server started on port 8080.")
+    (server/run-server handler {:port 8080})))
 
 ;@(promise)                                                  ;; wait until SIGINT
