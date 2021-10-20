@@ -178,12 +178,11 @@
           [:div.pt4.flex.justify-center.w-70.w8-ns
            {:style {:flex-shrink 0}}
            [:video.w-100
-            {:type        "video/mp4"
-             :muted       ""
+            {:muted       ""
              :autoplay    ""
              :loop        ""
              :playsinline ""}
-            [:source {:src "/img/chazer-spins.mp4"
+            [:source {:src  "/img/chazer-spins.mp4"
                       :type "video/mp4"}]]]
           [:div.flex-column.flex-wrap.items-center
            [:div.pl4-ns.f12-ns.f7
@@ -227,7 +226,7 @@
             [:video.w-100 {:type        "video/mp4"
                            :controls    ""
                            :playsinline ""}
-             [:source {:src "/img/chazer-infomercial.mp4"
+             [:source {:src  "/img/chazer-infomercial.mp4"
                        :type "video/mp4"}]]]]
           [:form.w-70.flex.justify-center {:action checkout-link}
            [:input.f6.pointer {:type "submit" :value "BUY NOW!"}]]]]]])))
@@ -263,15 +262,13 @@
     (println "Request:")
     ;(pprint req)
     (pprint uri))
-  (let [body     (some-> body slurp java.net.URLDecoder/decode)
-        _        (when (and debug? body)
-                   (println "Request body:" body))
-        response (case uri
-                   "/" (home-response)
-                   "/favicon.ico" (with-resource
-                                    (assoc req
-                                      :uri (str "/img" uri)))
-                   (with-resource req))]
+  (let [response
+        (case uri
+          "/" (home-response)
+          "/favicon.ico" (with-resource
+                           (assoc req
+                             :uri (str "/img" uri)))
+          (with-resource req))]
     (when debug?
       (println "Response:")
       (pprint (dissoc response :body))
@@ -279,11 +276,11 @@
     response))
 
 #_(def server
-  (do
-    (when-let [s (resolve 'server)]
-      (when (bound? s)
-        (s)))
-    (println "Server started on port 8080.")
-    (server/run-server handler {:port 8080})))
+    (do
+      (when-let [s (resolve 'server)]
+        (when (bound? s)
+          (s)))
+      (println "Server started on port 8080.")
+      (server/run-server handler {:port 8080})))
 
 ;@(promise)                                                  ;; wait until SIGINT
