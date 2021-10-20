@@ -182,7 +182,7 @@
              :muted    ""
              :autoplay ""
              :loop     ""}
-            [:source {:src "/public/img/chazer-spins.mp4"}]]]
+            [:source {:src "/img/chazer-spins.mp4"}]]]
           [:div.flex-column.flex-wrap.items-center
            [:div.pl4-ns.f12-ns.f7
             {:style (assoc base-text-style
@@ -209,22 +209,22 @@
            [:div.w-90.w8-ns
             [:img.w-100
              {;:style {:height "auto"}
-              :src "/public/img/cc-cards.png"}]]
+              :src "/img/cc-cards.png"}]]
            [:div.w-80.w8-ns
             [:img.w-100
              {:style {:filter "drop-shadow(6px 6px 2px #222)"}
-              :src   "/public/img/chazer-logo.png"}]]]
+              :src   "/img/chazer-logo.png"}]]]
           [:div.flex.justify-center.w-100.pb4.flex-column.items-center.pt5
            [:div.relative.w-60-ns.w-80-m.w-90
             {:style {:flex-shrink 0}}
             [:div.absolute.w7-ns.w6-m.w5
              {:style {:top "0px" :left "0px" :z-index 1}}
              [:img.br2.w-100
-              {:src   "/public/img/as-seen-on-youtube.jpeg"
+              {:src   "/img/as-seen-on-youtube.jpeg"
                :style {:transform "rotate(-30deg)"}}]]
             [:video.w-100 {:type     "video/mp4"
                            :controls ""}
-             [:source {:src "/public/img/chazer-infomercial.mp4"}]]]]
+             [:source {:src "/img/chazer-infomercial.mp4"}]]]]
           [:form {:action checkout-link}
            [:input.f7.pointer {:type "submit" :value "BUY NOW!"}]]]]]])))
 
@@ -248,7 +248,7 @@
       resp)))
 
 (defn with-resource [{:as req :keys [uri]}]
-  (when-let [resource (io/resource (subs uri 1))]
+  (when-let [resource (io/resource (str "public" uri))]
     (with-mime-type req
                     {:status 200
                      :body   (io/input-stream resource)})))
@@ -266,10 +266,8 @@
                    "/" (home-response)
                    "/favicon.ico" (with-resource
                                     (assoc req
-                                      :uri (str "/public/img" uri)))
-                   (cond
-                     (str/starts-with? uri "/public")
-                     (with-resource req)))]
+                                      :uri (str "/img" uri)))
+                   (with-resource req))]
     (when debug?
       (println "Response:")
       (pprint (dissoc response :body))
