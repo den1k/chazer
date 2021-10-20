@@ -178,10 +178,11 @@
           [:div.pt4.flex.justify-center.w-70.w8-ns
            {:style {:flex-shrink 0}}
            [:video.w-100
-            {:type     "video/mp4"
-             :muted    ""
-             :autoplay ""
-             :loop     ""}
+            {:type        "video/mp4"
+             :muted       ""
+             :autoplay    ""
+             :loop        ""
+             :playsinline ""}
             [:source {:src "/img/chazer-spins.mp4"}]]]
           [:div.flex-column.flex-wrap.items-center
            [:div.pl4-ns.f12-ns.f7
@@ -222,8 +223,9 @@
              [:img.br2.w-100
               {:src   "/img/as-seen-on-youtube.jpeg"
                :style {:transform "rotate(-30deg)"}}]]
-            [:video.w-100 {:type     "video/mp4"
-                           :controls ""}
+            [:video.w-100 {:type        "video/mp4"
+                           :controls    ""
+                           :playsinline ""}
              [:source {:src "/img/chazer-infomercial.mp4"}]]]]
           [:form {:action checkout-link}
            [:input.f7.pointer {:type "submit" :value "BUY NOW!"}]]]]]])))
@@ -275,11 +277,11 @@
     response))
 
 #_(def server
-  (do
-    (when-let [s (resolve 'server)]
-      (when (bound? s)
-        (s)))
-    (println "Server started on port 8080.")
-    (server/run-server handler {:port 8080})))
+    (do
+      (when-let [s (resolve 'server)]
+        (when (bound? s)
+          (s)))
+      (println "Server started on port 8080.")
+      (server/run-server handler {:port 8080})))
 
 ;@(promise)                                                  ;; wait until SIGINT
