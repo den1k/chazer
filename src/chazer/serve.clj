@@ -177,15 +177,18 @@
          [:div.flex.column-gap4.justify-center.flex-wrap.align-center
           [:div.pt4.flex.justify-center.w-70.w8-ns
            {:style {:flex-shrink 0}}
-           [:video.w-100
-            {:muted       ""
-             :autoplay    ""
-             :loop        ""
-             :playsinline ""}
-            [:source {:src  "/img/chazer-spins.mp4"
-                      :type "video/mp4"}]
-            #_[:source {:src  "/img/chazer-spins.webm"
-                        :type "video/webm"}]]]
+           [:img.w-100
+            {:src "/img/chazer-spins.gif"}]
+           #_[:video.w-100
+              {:muted       ""
+               :autoplay    ""
+               :loop        ""
+               :preload     "none"
+               :playsinline ""}
+              [:source {:src  "/img/chazer-spins.mp4"
+                        :type "video/mp4"}]
+              #_[:source {:src  "/img/chazer-spins.webm"
+                          :type "video/webm"}]]]
           [:div.flex-column.flex-wrap.items-center
            [:div.pl4-ns.f12-ns.f7
             {:style (assoc base-text-style
@@ -221,16 +224,24 @@
            [:div.relative.w-60-ns.w-80-m.w-80
             {:style {:flex-shrink 0}}
             [:div.absolute.w7-ns.w6-m.w5
-             {:style {:top "-7%" :left "-7%" :z-index 1}}
+             {:style {:top "-5%" :left "-7%" :z-index 1}}
              [:img.br2.w-100
               {:src   "/img/as-seen-on-youtube.jpeg"
                :style {:transform "rotate(-30deg)"}}]]
-            [:video.w-100 {:controls    ""
-                           :playsinline ""}
-             [:source {:src  "/img/chazer-infomercial.mp4"
-                       :type "video/mp4"}]
-             #_[:source {:src  "/img/chazer-infomercial.webm"
-                         :type "video/webm"}]]]]
+            [:iframe
+             {:width           "100%"
+              :height          "500px"
+              :src             "https://www.youtube.com/embed/WQNhJ9yR98g?controls=0&autoplay=1"
+              ;:title           "YouTube video player"
+              :frameborder     "0"
+              :allow           "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              :allowfullscreen "true"}]
+            #_[:video.w-100 {:controls    ""
+                             :playsinline ""}
+               [:source {:src  "/img/chazer-infomercial.mp4"
+                         :type "video/mp4"}]
+               #_[:source {:src  "/img/chazer-infomercial.webm"
+                           :type "video/webm"}]]]]
           [:form.w-70.flex.justify-center {:action checkout-link}
            [:input.f6.pointer {:type "submit" :value "BUY NOW!"}]]]]
 
@@ -253,6 +264,7 @@
           "mp4" "video/mp4"
           "webm" "video/webm"
           "png" "image/png"
+          "gif" "image/gif"
           "js" "application/javascript"
           ("jpg" "jpeg") "image/jpeg"))
       resp)))
@@ -283,11 +295,11 @@
     response))
 
 #_(def server
-  (do
-    (when-let [s (resolve 'server)]
-      (when (bound? s)
-        (s)))
-    (println "Server started on port 8080.")
-    (server/run-server handler {:port 8080})))
+    (do
+      (when-let [s (resolve 'server)]
+        (when (bound? s)
+          (s)))
+      (println "Server started on port 8080.")
+      (server/run-server handler {:port 8080})))
 
 ;@(promise)                                                  ;; wait until SIGINT
