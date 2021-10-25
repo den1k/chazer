@@ -1,6 +1,10 @@
 {:paths ["src" "resources"]
  :deps  {}
- :tasks {build-static {:doc "Builds static HTML"
-                       :requires ([chazer.serve :as ch])
-                       :task (spit "resources/public/index.html"
-                               ch/home-html)}}}
+ :tasks {build-static
+         {:doc      "Builds static HTML"
+          :requires ([chazer.serve :as ch])
+          :task     (do
+                      (spit "resources/public/index.html"
+                        ch/home-html)
+                      (spit "resources/public/howto.html"
+                        ch/howto-html))}}}
