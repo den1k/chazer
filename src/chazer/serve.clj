@@ -126,10 +126,12 @@
         [:.content-center {:align-content :center}]
         [:.items-center {:align-items :center}]
         [:.justify-center {:justify-content :center}]
+        [:.self-center {:align-self :center}]
         [:.no-underline {:text-decoration :none}]
         [:.relative {:position :relative}]
         [:.absolute {:position :absolute}]
         [:.dn {:position :none}]
+        [:.sans {:font-family "sans-serif"}]
         [:.br-pill {:border-radius :9999px}]
         [:.br-100 {:border-radius :100%}]
         [:.pointer {:cursor :pointer}]
@@ -160,23 +162,136 @@
 
 (def checkout-link "https://buy.stripe.com/8wM29qgfR0xC4mYeUU")
 
+(defn hiccup->html-string [h]
+  (str "<!DOCTYPE html>" (h/html h)))
+
 (def home-html
-  (str
-    "<!DOCTYPE html>\n"
-    (h/html
-      [:html
-       [:head
-        [:title "CHAZER 3000"]
-        [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
-        [:style {:type "text/css"} base-css]
-        ]
-       [:body.ma0
-        {:style {:background "rgb(0,75,255)"}}
-        ;[:nav "Chazer"]
-        [:div.pt3.flex.w-100.pb4
-         [:div.flex.column-gap4.justify-center.flex-wrap.align-center
-          [:div.pt4.flex.justify-center.w-70.w8-ns
-           {:style {:flex-shrink 0}}
+  (hiccup->html-string
+    [:html
+     [:head
+      [:title "CHAZER 3000"]
+      [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
+      [:style {:type "text/css"} base-css]]
+     [:body.ma0
+      {:style {:background "rgb(0,75,255)"}}
+      ;[:nav "Chazer"]
+      [:div.pt3.flex.w-100.pb4.flex-column
+       [:div.w-80.w8-ns.pa4.self-center
+        [:img.w-100
+         {:style {:filter "drop-shadow(6px 6px 2px #222)"}
+          :src   "/img/chazer-logo.png"}]]
+       [:div.flex.column-gap4.justify-center.flex-wrap.align-center
+        [:div.pt4.flex.justify-center.w-70.w8-ns
+         {:style {:flex-shrink 0}}
+         [:img.w-100
+          {:src "/img/chazer-spins.gif"}]
+         #_[:video.w-100
+            {:muted       ""
+             :autoplay    ""
+             :loop        ""
+             :preload     "none"
+             :playsinline ""}
+            [:source {:src  "/img/chazer-spins.mp4"
+                      :type "video/mp4"}]
+            #_[:source {:src  "/img/chazer-spins.webm"
+                        :type "video/webm"}]]]
+        [:div.flex-column.flex-wrap.items-center
+         [:div.pl4-ns.f12-ns.f7
+          {:style (assoc base-text-style
+                    :font-weight "bold"
+                    :font-style "italic")}
+          "now only!"]
+         [:div.f10.f23-ns.lh1-ns
+          {:style (assoc base-text-style
+                    :font-weight "bold"
+                    ;:line-height "14rem"
+                    ;:font-size "16rem"
+                    )}
+          "$69.69"]]
+        [:div.flex.column-gap5.row-gap3.items-center.pt4.flex-wrap.justify-center.w-100
+         [:a.f6.f10-ns.w-90.w8-ns
+          {:href  checkout-link
+           :style (assoc base-text-style
+                    ;:font-size "4rem"
+                    :font-style "italic"
+                    :text-shadow nil
+                    :text-align "center"
+                    :white-space "nowrap")}
+          "BUY NOW!"]
+         [:div.w-90.w8-ns
+          [:img.w-100
+           {;:style {:height "auto"}
+            :src "/img/cc-cards.png"}]]]
+        [:div.flex.justify-center.w-100.pb4.flex-column.items-center.pt5
+         [:div.relative.w-60-ns.w-80-m.w-80
+          {:style {:flex-shrink 0}}
+          [:div.absolute.w7-ns.w6-m.w5
+           {:style {:top "-5%" :left "-7%" :z-index 1}}
+           [:img.br2.w-100
+            {:src   "/img/as-seen-on-youtube.jpeg"
+             :style {:transform "rotate(-30deg)"}}]]
+          [:iframe {:width           "100%"
+                    :height          "500"
+                    :src             "https://www.youtube.com/embed/WQNhJ9yR98g" :title "YouTube video player" :frameborder "0" :allow "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    :allowfullscreen ""}]
+          #_[:iframe
+             {:width           "100%"
+              :height          "500px"
+              :src             "https://www.youtube.com/embed/WQNhJ9yR98g?controls=0&autoplay=1"
+              ;:title           "YouTube video player"
+              :frameborder     "0"
+              :allow           "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              :allowfullscreen "true"}]
+          #_[:video.w-100 {:controls    ""
+                           :playsinline ""}
+             [:source {:src  "/img/chazer-infomercial.mp4"
+                       :type "video/mp4"}]
+             #_[:source {:src  "/img/chazer-infomercial.webm"
+                         :type "video/webm"}]]]]
+        [:form.w-70.flex.justify-center {:action checkout-link}
+         [:input.f6.pointer {:type "submit" :value "BUY NOW!"}]]]]
+
+      ]]))
+
+(def howto-html
+  (hiccup->html-string
+    [:html
+     [:head
+      [:title "CHAZER 3000 HowTo"]
+      [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
+      [:style {:type "text/css"} base-css]]
+     [:body.sans.lh4.flex.justify-center
+      {:style {:background "rgb(0,75,255)"}}
+      [:div.w9-ns.w-80.flex.flex-column
+       {:style (dissoc base-text-style :text-shadow)}
+       [:div.w-80.w8-ns.self-center.pa3
+        [:img.w-100
+         {:style {:filter "drop-shadow(6px 6px 2px #222)"}
+          :src   "/img/chazer-logo.png"}]]
+       [:h1 "How to insert the laser into the chazer-collar-clip-case (grey case)"]
+       [:ol
+        [:li
+         "Our of the 3 cases you got start with the widest clip (4.5mm) and try it on your pets collar."
+         " If it's too big, go down one size until you find one that grips onto the collar well"
+         " (be careful not to use force and accidentally break the case)."]
+        [:li
+         "Once you found the right case, simple slide the brass-colored laser into the it. "
+         " If you feel the laser might slide out of the case just insert piece of paper on the side between laser and case."]]
+       [:h1 "How to turn CHAZER on/off"]
+       [:ol
+        [:li "Unscrew the end of the laser and insert 3 batteries"
+         " (make sure the + sign of the batteries lines up with the mark inside the laser's housing.)"]
+        [:li "Screw the end back onto the housing. As you do this the laser should light on!"]
+        [:li "To turn it off temporalily unscrew the housing until it almost comes off."]
+        [:li "For long term storage, remove the batteries and put them back into their case."]]
+       [:h1 "How to attach CHAZER"]
+       [:ol
+        [:li "Loosen the collar of your pet and pull it just over its ears."]
+        [:li "Attach CHAZER with the hole pointing forward (in the direction of the nose of your pet)."]
+        [:li "Turn it on and let your animal run wild!"]]
+
+        [:div.pt4.flex.justify-center.w-70.w8-ns.self-center
+         {:style {:flex-shrink  0}}
            [:img.w-100
             {:src "/img/chazer-spins.gif"}]
            #_[:video.w-100
@@ -188,74 +303,14 @@
               [:source {:src  "/img/chazer-spins.mp4"
                         :type "video/mp4"}]
               #_[:source {:src  "/img/chazer-spins.webm"
-                          :type "video/webm"}]]]
-          [:div.flex-column.flex-wrap.items-center
-           [:div.pl4-ns.f12-ns.f7
-            {:style (assoc base-text-style
-                      :font-weight "bold"
-                      :font-style "italic")}
-            "now only!"]
-           [:div.f10.f23-ns.lh1-ns
-            {:style (assoc base-text-style
-                      :font-weight "bold"
-                      ;:line-height "14rem"
-                      ;:font-size "16rem"
-                      )}
-            "$69.69"]]
-          [:div.flex.column-gap5.row-gap3.items-center.pt4.flex-wrap.justify-center.w-100
-           [:a.f6.f10-ns.w-90.w8-ns
-            {:href  checkout-link
-             :style (assoc base-text-style
-                      ;:font-size "4rem"
-                      :font-style "italic"
-                      :text-shadow nil
-                      :text-align "center"
-                      :white-space "nowrap")}
-            "BUY NOW!"]
-           [:div.w-90.w8-ns
-            [:img.w-100
-             {;:style {:height "auto"}
-              :src "/img/cc-cards.png"}]]
-           [:div.w-80.w8-ns
-            [:img.w-100
-             {:style {:filter "drop-shadow(6px 6px 2px #222)"}
-              :src   "/img/chazer-logo.png"}]]]
-          [:div.flex.justify-center.w-100.pb4.flex-column.items-center.pt5
-           [:div.relative.w-60-ns.w-80-m.w-80
-            {:style {:flex-shrink 0}}
-            [:div.absolute.w7-ns.w6-m.w5
-             {:style {:top "-5%" :left "-7%" :z-index 1}}
-             [:img.br2.w-100
-              {:src   "/img/as-seen-on-youtube.jpeg"
-               :style {:transform "rotate(-30deg)"}}]]
-            [:iframe {:width           "100%"
-                      :height          "500"
-                      :src             "https://www.youtube.com/embed/WQNhJ9yR98g" :title "YouTube video player" :frameborder "0" :allow "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      :allowfullscreen ""}]
-            #_[:iframe
-             {:width           "100%"
-              :height          "500px"
-              :src             "https://www.youtube.com/embed/WQNhJ9yR98g?controls=0&autoplay=1"
-              ;:title           "YouTube video player"
-              :frameborder     "0"
-              :allow           "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              :allowfullscreen "true"}]
-            #_[:video.w-100 {:controls    ""
-                             :playsinline ""}
-               [:source {:src  "/img/chazer-infomercial.mp4"
-                         :type "video/mp4"}]
-               #_[:source {:src  "/img/chazer-infomercial.webm"
-                           :type "video/webm"}]]]]
-          [:form.w-70.flex.justify-center {:action checkout-link}
-           [:input.f6.pointer {:type "submit" :value "BUY NOW!"}]]]]
+                          :type "video/webm"}]]]]
 
-        ]])))
+      ]]))
 
-;; the home page
-(defn home-response []
+(defn html-response [html]
   {:status  200
    :headers {"Content-Type" "text/html"}
-   :body    home-html})
+   :body    html})
 
 
 (defn with-mime-type [{:as req :keys [uri]} resp]
@@ -287,7 +342,8 @@
     (pprint uri))
   (let [response
         (case uri
-          "/" (home-response)
+          "/" (html-response home-html)
+          "/howto"  (html-response howto-html)
           "/favicon.ico" (with-resource
                            (assoc req
                              :uri (str "/img" uri)))
