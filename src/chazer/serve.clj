@@ -275,13 +275,13 @@
          " If it's too big, go down one size until you find one that grips onto the collar well"
          " (be careful not to use force and accidentally break the case)."]
         [:li
-         "Once you found the right case, simple slide the brass-colored laser into the it. "
+         "Once you found the right case, simply slide the brass-colored laser into it. "
          " If you feel the laser might slide out of the case just insert piece of paper on the side between laser and case."]]
        [:h1 "How to turn CHAZER on/off"]
        [:ol
         [:li "Unscrew the end of the laser and insert 3 batteries"
          " (make sure the + sign of the batteries lines up with the mark inside the laser's housing.)"]
-        [:li "Screw the end back onto the housing. As you do this the laser should light on!"]
+        [:li "Screw the end back onto the housing. As you do this the laser should light up!"]
         [:li "To turn it off temporalily unscrew the housing until it almost comes off."]
         [:li "For long term storage, remove the batteries and put them back into their case."]]
        [:h1 "How to attach CHAZER"]
